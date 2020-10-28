@@ -6,7 +6,7 @@ Implementing a Graph and Binary Search Tree data structure in Python. Then testi
 including a Depth First Search and Breadth First Search
 """
 
-from collections import defaultdict
+from collections import defaultdict, deque
 
 
 class Graph:
@@ -80,7 +80,6 @@ class BST:
                 visited.append(temp)
             else :
                 stack.pop()
-            
 
 
     def print_bst_dfs_rec(self,curr): # print the binary search tree using depth first method recursively
@@ -91,13 +90,21 @@ class BST:
         if curr.right != None:
             self.print_bst_dfs_rec(curr.right)
 
-    def print_bst_bfs(self):
-        temp = self.root
-        queue = [temp.value]
+
+    def print_bst_bfs(self): # print the binary search tree using breadth first method
+
+        print(self.root.value)
+        queue = [self.root]
+        while (len(queue) != 0):
+            for temp in queue[:]:
+                if (temp.left != None):
+                    queue.append(temp.left)
+                    print(temp.left.value)
+                if (temp.right != None):
+                    queue.append(temp.right)
+                    print(temp.right.value)
+                queue.pop(0)
         
-
-
-
 
 
 
@@ -113,11 +120,10 @@ if __name__ == "__main__":
         bst1.add_leaf(i)
 
 
-
-    print('Printing BST DFS Iteratively')
+    print('Printing BST using DFS Iteratively')
     bst1.print_bst_dfs_iter()
-    print('Printing BST DFS Recursively')
+    print('Printing BST using DFS Recursively')
     bst1.print_bst_dfs_rec(bst1.root)
-    #print('Printing BST BFS')
-    #bst1.print_bst_bfs(bst1.root)
+    print('Printing BST using BFS')
+    bst1.print_bst_bfs()
 
