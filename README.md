@@ -1,0 +1,1 @@
+This folder is to practice with common CS data structures and algorithms 
