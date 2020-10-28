@@ -20,8 +20,8 @@ class Graph:
 
 
 
-class Point:
-    'This class represents a point'
+class Node:
+    'This class represents a node'
 
     def __init__(self,value,left=None,right=None):
         self.value = value
@@ -34,21 +34,21 @@ class BST:
     'This class represents a Binary Search Tree'
 
     def __init__(self,root):
-        self.root = Point(root)
+        self.root = Node(root)
 
-    def add_leaf(self,leaf):
+    def add_leaf(self,leaf): # add leaf to tree
         temp = self.root
         while (temp != None):
             if (leaf < temp.value): 
                 if (temp.left == None):
-                    temp.left = Point(leaf)
+                    temp.left = Node(leaf)
                     temp = None
                 else:
                     temp = temp.left
 
             elif (leaf > temp.value):
                 if (temp.right == None):
-                    temp.right = Point(leaf)
+                    temp.right = Node(leaf)
                     temp = None
                 else:
                     temp = temp.right
@@ -56,15 +56,34 @@ class BST:
                 print('same value as something in here already')
                 temp = None
 
-    def print_bst_dfs_iter(self):
-        temp = self.root
-        stack = [temp.value]
-        while (temp.left != None):
-            temp = temp.left
-            stack.append(temp.value)
-        print(stack)
 
-    def print_bst_dfs_rec(self,curr): # WORKS
+    def print_bst_dfs_iter(self): # print the binary search tree using depth first method iteratively
+
+        temp = self.root
+        print(temp.value)
+        visited = [temp] # list of what nodes have been visited
+        stack = [temp] # our stack
+
+        while (len(stack) != 0):
+
+            temp = stack[-1]
+
+            if (temp.left != None and temp.left not in visited):
+                temp = temp.left
+                print(temp.value)
+                stack.append(temp)
+                visited.append(temp)
+            elif (temp.right != None and temp.right not in visited):
+                temp = temp.right
+                print(temp.value)
+                stack.append(temp)
+                visited.append(temp)
+            else :
+                stack.pop()
+            
+
+
+    def print_bst_dfs_rec(self,curr): # print the binary search tree using depth first method recursively
 
         print(curr.value)
         if curr.left != None:
@@ -84,11 +103,6 @@ class BST:
 
 
 
-
-
-    
-
-
 if __name__ == "__main__":
 
     #g1 = Graph()
@@ -100,8 +114,8 @@ if __name__ == "__main__":
 
 
 
-    #print('Printing BST DFS Iteratively')
-    #bst1.print_bst_dfs_iter()
+    print('Printing BST DFS Iteratively')
+    bst1.print_bst_dfs_iter()
     print('Printing BST DFS Recursively')
     bst1.print_bst_dfs_rec(bst1.root)
     #print('Printing BST BFS')
