@@ -1,6 +1,10 @@
-
-## Playing around and implementing a Depth First Search and Breadth First Search in Python 
-#  with Graphs and Binary Search Trees
+"""
+Hunter Mitchell
+10/28/20
+Description:
+Implementing a Graph and Binary Search Tree data structure in Python. Then testing different search methods
+including a Depth First Search and Breadth First Search
+"""
 
 from collections import defaultdict
 
