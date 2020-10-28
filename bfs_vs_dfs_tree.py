@@ -6,17 +6,15 @@ Implementing a Graph and Binary Search Tree data structure in Python. Then testi
 including a Depth First Search and Breadth First Search
 """
 
-from collections import defaultdict, deque
-
 
 class Graph:
     'This class represents a graph'
 
-    def __init__(self):
-        self.graph = {}
+    def __init__(self,edges):
+        self.graph = edges
 
-    #def add_edge(self,a,b)
-    #    self.graph
+    def add_edge(self,a,b):
+        self.graph[a] = b
 
 
 
@@ -109,12 +107,18 @@ class BST:
 
 
 
-
 if __name__ == "__main__":
 
-    #g1 = Graph()
-    #print(g1.graph)
+    
+    graph_edges = {
+        1:3, 9:2, 3:[4,5], 5:1
+    }
+    g1 = Graph(edges=graph_edges)
 
+    print(g1.graph)
+
+
+    """
     bst1 = BST(5)
     for i in [3,1,4,8,10]:
         bst1.add_leaf(i)
@@ -126,4 +130,5 @@ if __name__ == "__main__":
     bst1.print_bst_dfs_rec(bst1.root)
     print('Printing BST using BFS')
     bst1.print_bst_bfs()
+    """
 
