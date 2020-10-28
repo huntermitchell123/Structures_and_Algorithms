@@ -70,13 +70,13 @@ class BST:
                 stack.pop()
 
 
-    def print_bst_dfs_rec(self,curr): # print the binary search tree using depth first method recursively
+    def print_bst_dfs_recur(self,curr): # print the binary search tree using depth first method recursively
 
         print(curr.value)
         if curr.left != None:
-            self.print_bst_dfs_rec(curr.left)
+            self.print_bst_dfs_recur(curr.left)
         if curr.right != None:
-            self.print_bst_dfs_rec(curr.right)
+            self.print_bst_dfs_recur(curr.right)
 
 
     def print_bst_bfs(self): # print the binary search tree using breadth first method
@@ -109,7 +109,7 @@ if __name__ == "__main__":
     print('Printing BST using DFS Iteratively')
     bst1.print_bst_dfs_iter()
     print('Printing BST using DFS Recursively')
-    bst1.print_bst_dfs_rec(bst1.root)
+    bst1.print_bst_dfs_recur(bst1.root)
     print('Printing BST using BFS')
     bst1.print_bst_bfs()
 
