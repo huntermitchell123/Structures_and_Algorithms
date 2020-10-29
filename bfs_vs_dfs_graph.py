@@ -15,10 +15,21 @@ class Graph:
         self.graph = edges
 
     def add_edge(self,a,b):
-        self.graph[a] = b
+        try:
+            if type(self.graph[a]) == int: # if a is already connected a number
+                temp_list = [self.graph[a]]
+                temp_list.append(b)
+                self.graph[a] = temp_list
+            elif type(self.graph[a]) == list: # if a is already connected to multiple numbers
+                temp_list = self.graph[a]
+                temp_list.append(b)
+                self.graph[a] = temp_list
+        except: # if a is not connected to anything
+            self.graph[a] = b
 
-    def print_graph_dfs_iter(self,root): # print the graph using depth first method iteratively
-        temp = root
+
+    def print_graph_dfs_iter(self,start): # print the graph using depth first method iteratively
+        temp = start
         print(temp)
         stack = [temp]
         visited = [temp]
@@ -45,16 +56,50 @@ class Graph:
                 stack.pop()
 
 
-    def print_graph_dfs_recur(self,curr): # print the graph using depth first method recursively - NOT DONE
+    def print_graph_dfs_recur(self,curr,visited): # print the graph using depth first method recursively
 
-        print(self.graph[curr])
-        if self.graph[curr] != None:
-            for next in self.graph[curr]:
-                self.print_bst_dfs_recur(next)
+        print(curr)
+        visited.append(curr)
+
+        try:
+            if type(self.graph[curr]) == int: # if there is one number next
+                if self.graph[curr] not in visited:
+                    self.print_graph_dfs_recur(self.graph[curr],visited)
+
+            if type(self.graph[curr]) == list: # if there are multiple numbers next
+                for i in self.graph[curr]:
+                    if i not in visited:
+                        self.print_graph_dfs_recur(i,visited)
+
+        except: # if there is nothing next
+            pass
 
 
-    def print_graph_bfs(self): # print the graph using breadth first method - NOT DONE
-        pass
+    def print_graph_bfs(self,start): # print the graph using breadth first method
+
+        print(start)
+        queue = [start]
+        visited = [start]
+
+        while (len(queue) != 0):
+            for temp in queue[:]:
+
+                try:
+                    if type(self.graph[temp]) == int and self.graph[temp] not in visited: # if next is one number
+                        print(self.graph[temp])
+                        queue.append(self.graph[temp])
+                        visited.append(self.graph[temp])
+                    if type(self.graph[temp]) == list: # if next is multiple numbers
+                        for i in self.graph[temp]:
+                            if i not in visited:
+                                print(i)
+                                queue.append(i)
+                                visited.append(i)
+
+                except: # if there is nothing next
+                    pass
+
+                queue.pop(0)
 
 
 
@@ -64,13 +109,20 @@ if __name__=="__main__":
         1:2, 2:[3,4], 3:5, 5:1
     }
     g1 = Graph(edges=graph_edges)
-    g1.add_edge(4,6)
 
-    print(g1.graph)
+    g1.add_edge(4,6)
+    g1.add_edge(2,6)
+    g1.add_edge(3,6)
+
+    print("Graph edges: ",g1.graph)
+
     print("Printing Graph using dfs iteratively")
     g1.print_graph_dfs_iter(1)
-    #print("Printing Graph using dfs recursively")
-    #g1.print_graph_dfs_recur(1)
+    print("Printing Graph using dfs recursively")
+    g1.print_graph_dfs_recur(1,[])
+    print("Printing Graph using bfs")
+    g1.print_graph_bfs(1)
+    
 
 
 
