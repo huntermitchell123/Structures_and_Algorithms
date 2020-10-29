@@ -111,8 +111,6 @@ if __name__=="__main__":
     g1 = Graph(edges=graph_edges)
 
     g1.add_edge(4,6)
-    g1.add_edge(2,6)
-    g1.add_edge(3,6)
 
     print("Graph edges: ",g1.graph)
 
