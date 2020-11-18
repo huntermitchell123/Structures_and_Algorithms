@@ -112,7 +112,7 @@ if __name__=="__main__":
 
     g1.add_edge(4,6)
 
-    print("Graph edges: ",g1.graph)
+    print("Graph edges: ", g1.graph)
 
     print("Printing Graph using dfs iteratively")
     g1.print_graph_dfs_iter(1)
