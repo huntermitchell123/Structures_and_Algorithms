@@ -1,4 +1,4 @@
-# An implementation of a hash table in python
+# An implementation of a hash table in python :)
 
 class HashTable:
     def __init__(self,max_size=100):
